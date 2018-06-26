@@ -1,4 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,24 +101,21 @@
 </style>
 </head>
 <body>
-    <div class="signup-form">
-        <h1>
-          Welcome to {{ title }}!
-        </h1>
-        <nav>
-          <!-- <a routerLink="/sign_up" routerLinkActive="active">Create Account</a> -->
-        </nav>
-      </div>
-      <router-outlet></router-outlet>
-      
+<div class="signup-form">
+		<h2>Register</h2>
+		<p class="hint-text">Create your account</p>
+        <div class="form-group">      	
+        </div>
+        <div class="form-group">
+        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        </div>
+		<div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        </div>
+		<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+        </div>
+	<div class="text-center">Don't have account? <a routerLink="/sign_up" routerLinkActive="active">Sign Up</a></div>
+</div>
 </body>
 </html>                            
-
-
-
-
-
-
-
-
-
