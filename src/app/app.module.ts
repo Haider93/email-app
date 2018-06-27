@@ -6,6 +6,9 @@ import { FoldersPanelComponent } from './folders-panel/folders-panel.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from  '@angular/common/http';
+import { ApiService } from  './api.service';
+
 
 const routes: Routes = [
   { path: 'sign_up', component: SignUpComponent },
@@ -24,9 +27,10 @@ const routes: Routes = [
       routes,
       { enableTracing: true } // <-- debugging purposes only
     ),
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

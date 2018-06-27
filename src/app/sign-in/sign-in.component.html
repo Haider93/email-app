@@ -102,18 +102,17 @@
 </head>
 <body>
 <div class="signup-form">
-		<h2>Register</h2>
-		<p class="hint-text">Create your account</p>
+		<h2>Login</h2>
         <div class="form-group">      	
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+        	<input type="email" #email class="form-control" name="email" placeholder="Email" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" #password class="form-control" name="password" placeholder="Password" required="required">
         </div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+            <button type="submit" class="btn btn-success btn-lg btn-block" (click)="signIn(email,password)">Sign In</button>
         </div>
 	<div class="text-center">Don't have account? <a routerLink="/sign_up" routerLinkActive="active">Sign Up</a></div>
 </div>
