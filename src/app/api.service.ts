@@ -10,6 +10,7 @@ export class ApiService {
   constructor(private  httpClient:  HttpClient) { }
 
   signUp(email: string, password: string){
+    localStorage.setItem("email-app-session",JSON.stringify({"email": email}));
     return  this.httpClient.get(`${this.API_URL}/sign_up/`+email+'/'+password);
 }
 }

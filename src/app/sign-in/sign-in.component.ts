@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from  '../api.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(private  apiService:  ApiService, public router: Router) { }
 
   ngOnInit() {
+     var app_session = JSON.parse(localStorage.getItem("email-app-session"));
+     var keys = [];
+    if(app_session != null)
+    {
+      for(var k in app_session) keys.push(k);
+      var val = app_session[k];
+      this.router.navigate(['/side_panel']);
+    }
   }
 
   userEmail: string
