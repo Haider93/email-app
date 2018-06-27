@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Email} from '../models/email';
+import {EMAILS} from '../models/mock-emails';
 
 @Component({
   selector: 'app-folders-panel',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FoldersPanelComponent implements OnInit {
 
+  
   constructor() { }
 
   ngOnInit() {
+    this.emails = EMAILS;
   }
 
+
+  emails: Email[]
+  inbox(){
+    
+  }
+
+  sent(){}
+
+  deleted(){}
 }

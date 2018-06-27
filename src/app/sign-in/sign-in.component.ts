@@ -12,8 +12,10 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
+  userEmail: string
+
   signIn(email,password){
-    alert(email.value+"is logged in");
+    this.userEmail = email.value;
   }
 
 }
