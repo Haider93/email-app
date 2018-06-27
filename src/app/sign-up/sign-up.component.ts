@@ -18,8 +18,8 @@ export class SignUpComponent implements OnInit {
     var keys = [];
     if(app_session != null)
     {
-      for(var k in app_session) keys.push(k);
-      var val = app_session[k];
+      // for(var k in app_session) keys.push(k);
+      // var val = app_session[k];
       this.router.navigate(['/side_panel']);
     }
   }
@@ -35,6 +35,8 @@ export class SignUpComponent implements OnInit {
       this.apiService.signUp(email.value,password.value).subscribe((data:  string) => {
         this.signUpToken  =  data;
       });
+      this.apiService._signOutOption.next(true);
+      this.apiService._userEmail.next(email.value);
       this.router.navigate(['/side_panel']);
     }
   }

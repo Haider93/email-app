@@ -16,16 +16,26 @@ export class SignInComponent implements OnInit {
      var keys = [];
     if(app_session != null)
     {
-      for(var k in app_session) keys.push(k);
-      var val = app_session[k];
+      // for(var k in app_session) keys.push(k);
+      // var val = app_session[k];
       this.router.navigate(['/side_panel']);
     }
   }
 
-  userEmail: string
 
   signIn(email,password){
-    this.userEmail = email.value;
+    this.apiService.signIn(email.value,password.value).subscribe((data: any) => {
+      console.log("signed In---",data);
+      this.router.navigate(['/side_panel']);
+      this.apiService._signOutOption.next(true);
+      this.apiService._userEmail.next(email.value);
+    });
+    // var email_id = this.data["email"];
+    //   var pwd = this.data["password"];
+    //   if(email == email_id && password == pwd)
+    //     this.router.navigate(['/side_panel']);
+    //   else
+    //     alert("wrong credentials");
   }
 
 }

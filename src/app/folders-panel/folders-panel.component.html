@@ -6,7 +6,6 @@
 
 <body>
   <div>
-    <input type="button" id="btn1" value="Show Hide" (click)="inbox()" />
     <div class="sidenav">
       <a href="#">Inbox</a>
       <a href="#">Sent</a>
@@ -16,16 +15,16 @@
 
     <div class="main" ng-if="emails">
       <table class="table">
-        <thead>
+        <!-- <thead>
           <tr>
             <th scope="col">Sender</th>
-            <th scope="col">Receiver</th>
+            <th scope="col">Subject</th>
           </tr>
-        </thead>
+        </thead> -->
         <tbody>
           <tr *ngFor="let email of emails">
+                <td>{{email.subject}}</td>
                 <td>{{email.sender}}</td>
-                <td>{{email.receiver}}</td>
           </tr>
         </tbody>
       </table>

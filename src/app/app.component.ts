@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from  './api.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,10 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Email App';
   userEmail: string;
-  constructor(public router: Router){
+  signOutOption: boolean;
+  constructor(private  apiService:  ApiService, public router: Router){
     this.router.navigate(['sign_up']);
+    console.log(this.apiService._userEmail);
      var app_session = JSON.parse(localStorage.getItem("email-app-session"));
      if(app_session != null)
      {
@@ -18,12 +21,22 @@ export class AppComponent {
       for(var k in app_session) keys.push(k);
       var val = app_session[k];
       this.userEmail = val;
+      this.signOutOption = true;
      }
+
+     this.apiService._userEmail.subscribe(value => {
+      this.userEmail = value;
+    });
+    this.apiService._signOutOption.subscribe(value => {
+      this.signOutOption = value;
+    });
     
   }
 
   signOut(){
     localStorage.clear();
+    this.apiService._signOutOption.next(false);
+    this.apiService._userEmail.next("");
     this.router.navigate(['sign_in']);
   }
 }
