@@ -12,7 +12,8 @@ import { ApiService } from  './api.service';
 
 const routes: Routes = [
   { path: 'sign_up', component: SignUpComponent },
-  { path: 'sign_in', component: SignInComponent }
+  { path: 'sign_in', component: SignInComponent },
+  {path: 'side_panel', component: FoldersPanelComponent}
 ];
 
 @NgModule({

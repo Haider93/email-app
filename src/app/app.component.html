@@ -14,7 +14,7 @@
 <style type="text/css">
 	body{
 		color: #fff;
-		background: #63738a;
+		background:#999;
 		font-family: 'Roboto', sans-serif;
 	}
     .form-control{
@@ -106,10 +106,11 @@
         <h1>
           Welcome to {{ title }}!
         </h1>
-        <nav>
-          <!-- <a routerLink="/sign_up" routerLinkActive="active">Create Account</a> -->
-        </nav>
-      </div>
+	  </div>
+	  <div class="signup-form"></div>
+	  <nav>
+			<a routerLink="/side_panel" routerLinkActive="active">Display</a>
+		</nav>
       <router-outlet></router-outlet>
       
 </body>

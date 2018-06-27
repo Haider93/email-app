@@ -1,3 +1,69 @@
-<p>
-  folders-panel works!
-</p>
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body ng-controller="MyController">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+  <script type="text/javascript">
+    var app = angular.module('MyApp', [])
+    app.controller('MyController', function ($scope) {
+      //This will hide the DIV by default.
+      $scope.IsVisible = false;
+      $scope.ShowHide = function () {
+        //If DIV is visible it will be hidden and vice versa.
+        $scope.IsVisible = $scope.IsVisible ? false : true;
+      }
+    });
+  </script>
+  <div ng-app="MyApp" ng-controller="MyController">
+    <input type="button" value="Show Hide" ng-click="ShowHide()" />
+    <!-- Side navigation -->
+    <div class="sidenav">
+      <a href="#">Inbox</a>
+      <a href="#">Sent</a>
+      <a href="#">Deleted</a>
+      <a routerLink="/sign_in" routerLinkActive="active">back</a>
+    </div>
+    <div ng-show="IsVisible">
+      <!-- Page content -->
+      <div class="main">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
