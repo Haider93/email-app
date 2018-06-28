@@ -106,11 +106,11 @@
         <h1>
           Welcome to {{ title }}!
 		</h1>
-		<p ng-bind="userEmail">{{userEmail}}</p>  <a *ngIf="signOutOption" (click)="signOut()" routerLinkActive="active">sign out</a>
+		<p>{{userEmail}}</p> <a *ngIf="signOutOption" (click)="signOut()" routerLinkActive="active">sign out</a>
 	  </div>
 	  <div class="signup-form"></div>
 	  <nav>
-			<a routerLink="/side_panel" *ngIf="signOutOption" routerLinkActive="active">Display</a>
+			<!-- <a routerLink="/side_panel" *ngIf="signOutOption" routerLinkActive="active">Display</a> -->
 		</nav>
       <router-outlet></router-outlet>
       

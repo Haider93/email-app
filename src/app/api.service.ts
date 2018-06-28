@@ -24,5 +24,9 @@ export class ApiService {
     this.email = email;
     localStorage.setItem("email-app-session",JSON.stringify({"email": email}));
     return  this.httpClient.get(`${this.API_URL}/sign_in/`+email+'/'+password);
-  }    
+  } 
+  
+  inbox(email: string){
+    return  this.httpClient.get(`${this.API_URL}/inbox/`+email);
+  }
 }

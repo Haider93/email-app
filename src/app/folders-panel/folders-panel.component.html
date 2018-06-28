@@ -7,10 +7,10 @@
 <body>
   <div>
     <div class="sidenav">
-      <a href="#">Inbox</a>
-      <a href="#">Sent</a>
-      <a href="#">Deleted</a>
-      <a routerLink="/sign_in" routerLinkActive="active">back</a>
+      <a routerLink="/side_panel" routerLinkActive="active" >Inbox</a>
+      <a routerLink="/side_panel" routerLinkActive="active">Sent</a>
+      <a routerLink="/side_panel" routerLinkActive="active">Deleted</a>
+      <!-- <a routerLink="/sign_in" routerLinkActive="active">back</a> -->
     </div>
 
     <div class="main" ng-if="emails">
@@ -23,8 +23,8 @@
         </thead> -->
         <tbody>
           <tr *ngFor="let email of emails">
-                <td>{{email.subject}}</td>
                 <td>{{email.sender}}</td>
+                <td>{{email.subject}}</td>
           </tr>
         </tbody>
       </table>
