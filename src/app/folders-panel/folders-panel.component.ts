@@ -36,6 +36,9 @@ export class FoldersPanelComponent implements OnInit {
     });
   }
 
+  composeEmail(){
+    alert("compose")
+  }
   sent(){
     alert("sent  ncalled")
   }

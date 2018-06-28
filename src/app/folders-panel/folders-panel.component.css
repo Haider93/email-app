@@ -28,6 +28,11 @@
     text-decoration:underline;
 }
 
+.sidenav button{
+    padding: 10px 20px;
+    font-size: 17px;
+}
+
 /* .sidenav .focus{
     border-top: 3px solid red;
     border-bottom: 3px solid red;

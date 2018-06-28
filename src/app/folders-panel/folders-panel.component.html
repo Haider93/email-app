@@ -7,6 +7,7 @@
 <body>
   <div>
     <div class="sidenav">
+      <button type="button" class="btn btn-primary" (click)="composeEmail()">Compose</button>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="inbox()">Inbox</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="sent()">Sent</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="deleted()">Deleted</a>
@@ -14,7 +15,24 @@
     </div>
 
     <div class="main" ng-if="emails">
-      <table class="table">
+      <br/>
+      <div>
+        <h1>Main Panel goes here</h1>
+        <table class="table">
+            <tbody>
+              <tr>
+                <td>
+                    <p>Select all</p><input type="checkbox" id="myCheck" onclick="">
+                </td>
+                <td><button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-remove-sign"></span> delete
+                  </button></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      
+      <table class="table table-hover">
         <!-- <thead>
           <tr>
             <th scope="col">Sender</th>
@@ -23,8 +41,12 @@
         </thead> -->
         <tbody>
           <tr *ngFor="let email of emails">
+                <td><input type="checkbox" id="myCheck" onclick=""></td>
                 <td>{{email.sender}}</td>
                 <td>{{email.subject}}</td>
+                <td><button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-remove-sign"></span> delete
+                  </button></td>
           </tr>
         </tbody>
       </table>
