@@ -12,8 +12,8 @@ export class AppComponent {
   userEmail: string;
   signOutOption: boolean;
   constructor(private  apiService:  ApiService, public router: Router){
-    this.router.navigate(['sign_up']);
-    console.log(this.apiService._userEmail);
+    
+    this.router.navigate(['side_panel']);
      var app_session = JSON.parse(localStorage.getItem("email-app-session"));
      if(app_session != null)
      {
@@ -22,14 +22,18 @@ export class AppComponent {
       var val = app_session[k];
       this.userEmail = val;
       this.signOutOption = true;
+      //alert(this.userEmail+this.signOutOption);
      }
-
+     else{
+      this.router.navigate(['sign_up']);
+     }
      this.apiService._userEmail.subscribe(value => {
       this.userEmail = value;
-    });
+      });
     this.apiService._signOutOption.subscribe(value => {
       this.signOutOption = value;
-    });
+      });
+     
     
   }
 

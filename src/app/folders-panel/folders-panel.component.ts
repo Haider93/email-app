@@ -20,19 +20,27 @@ export class FoldersPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.emails = EMAILS;
+    //this.emails = EMAILS;
+    this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
+      console.log("signed In---",data.result.rows);
+      this.emails = data.result.rows;
+    });
   }
 
   loggedInEmail: string;
   emails: Email[]
   inbox(){
-    alert("inbox method called");
-    // this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
-    //   console.log("signed In---",data);
-    // });
+    this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
+      console.log("signed In---",data.result.rows);
+      this.emails = data.result.rows;
+    });
   }
 
-  sent(){}
+  sent(){
+    alert("sent  ncalled")
+  }
 
-  deleted(){}
+  deleted(){
+    alert("delete called")
+  }
 }

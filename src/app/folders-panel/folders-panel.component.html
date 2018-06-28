@@ -7,9 +7,9 @@
 <body>
   <div>
     <div class="sidenav">
-      <a routerLink="/side_panel" routerLinkActive="active" >Inbox</a>
-      <a routerLink="/side_panel" routerLinkActive="active">Sent</a>
-      <a routerLink="/side_panel" routerLinkActive="active">Deleted</a>
+      <a routerLink="/side_panel" routerLinkActive="active" (click)="inbox()">Inbox</a>
+      <a routerLink="/side_panel" routerLinkActive="active" (click)="sent()">Sent</a>
+      <a routerLink="/side_panel" routerLinkActive="active" (click)="deleted()">Deleted</a>
       <!-- <a routerLink="/sign_in" routerLinkActive="active">back</a> -->
     </div>
 
