@@ -13,7 +13,7 @@ export class AppComponent {
   signOutOption: boolean;
   constructor(private  apiService:  ApiService, public router: Router){
     
-    this.router.navigate(['side_panel']);
+    //this.router.navigate(['side_panel']);
      var app_session = JSON.parse(localStorage.getItem("email-app-session"));
      if(app_session != null)
      {

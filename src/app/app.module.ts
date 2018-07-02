@@ -8,12 +8,17 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from  '@angular/common/http';
 import { ApiService } from  './api.service';
+import { ComposeModalComponent } from './compose-modal/compose-modal.component';
 
 
 const routes: Routes = [
   { path: 'sign_up', component: SignUpComponent },
   { path: 'sign_in', component: SignInComponent },
-  {path: 'side_panel', component: FoldersPanelComponent}
+  {path: 'side_panel', component: FoldersPanelComponent},
+  // {path: 'side_panel/inbox', component: FoldersPanelComponent},
+  // {path: 'side_panel/sent', component: FoldersPanelComponent},
+  {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'}
+  //,{path: '**', redirectTo: "/side_panel"}
 ];
 
 @NgModule({
@@ -21,7 +26,8 @@ const routes: Routes = [
     AppComponent,
     FoldersPanelComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    ComposeModalComponent
   ],
   imports: [
     RouterModule.forRoot(

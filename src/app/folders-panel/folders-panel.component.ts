@@ -36,14 +36,23 @@ export class FoldersPanelComponent implements OnInit {
     });
   }
 
-  composeEmail(){
-    alert("compose")
-  }
+  
   sent(){
-    alert("sent  ncalled")
+    this.apiService.sent(this.loggedInEmail).subscribe((data: any) => {
+      console.log("signed In---",data.result.rows);
+      this.emails = data.result.rows;
+    });
   }
 
   deleted(){
     alert("delete called")
+  }
+  composeEmail(receiver,subject,body){
+    var date = '23-may-2018';
+    var time = '11:00';
+    console.log('email subject---------------', subject);
+    this.apiService.reply(this.loggedInEmail,receiver,subject,body,date,time).subscribe((data: any) => {
+      console.log("signed In---",data.result.rows);
+    });
   }
 }

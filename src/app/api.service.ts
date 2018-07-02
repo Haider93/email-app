@@ -29,4 +29,10 @@ export class ApiService {
   inbox(email: string){
     return  this.httpClient.get(`${this.API_URL}/inbox/`+email);
   }
+  sent(email: string){
+    return  this.httpClient.get(`${this.API_URL}/sent/`+email);
+  }
+  reply(sender: string, receiver: string,subject: string, body: string,date: string, time: string){
+    return  this.httpClient.get(`${this.API_URL}/reply/`+sender+'/'+receiver+'/'+subject+'/'+body+'/'+date+'/'+time);
+  }
 }

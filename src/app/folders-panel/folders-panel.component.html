@@ -7,13 +7,15 @@
 <body>
   <div>
     <div class="sidenav">
-      <button type="button" class="btn btn-primary" (click)="composeEmail()">Compose</button>
+      <button type="button" class="btn btn-primary" (click)="modal1.show()" >Compose</button>
+      <a [routerLink]="[{ outlets: { compose: ['compose_email']}}]" >Compose</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="inbox()">Inbox</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="sent()">Sent</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="deleted()">Deleted</a>
       <!-- <a routerLink="/sign_in" routerLinkActive="active">back</a> -->
     </div>
 
+    
     <div class="main" ng-if="emails">
       <br/>
       <div>
@@ -31,6 +33,22 @@
             </tbody>
           </table>
       </div>
+
+      <app-compose-modal #modal1>
+          <div class="app-compose-modal-header">
+             <h1>Compose Email</h1>
+          </div>
+          <div class="app-compose-modal-body" style="height:auto;width:auto;">
+              <input type="text" class="form-control " #receiver name="to " placeholder="receiver " required="required "><br/>
+              <!-- <input ng-value='loggedInEmail' type="text" class="form-control " #sender name="from " placeholder="sender " required="required "><br/> -->
+              <input type="text" class="form-control " #subject name="subject " placeholder="Email Subject " required="required "><br/>
+              <textarea rows="4" class="form-control " #body cols="65" placeholder="Email body "></textarea> 
+          </div>
+          <div class="app-compose-modal-footer">
+              <button type="button" class="btn btn-default" (click)='composeEmail(receiver.value,subject.value,body.value);modal1.hide()'>Send</button>
+              <button type="button" class="btn btn-primary" (click)='modal1.hide()'>Close</button>
+          </div>
+      </app-compose-modal>
       
       <table class="table table-hover">
         <!-- <thead>
