@@ -17,6 +17,7 @@ export class FoldersPanelComponent implements OnInit {
   public emailDetail: Email;
   showHideEmailDetail: boolean = false;
   showHideEmailList: boolean = true;
+  backButton: boolean = false;
 
   constructor(private  apiService:  ApiService, public dataService: DataServiceService, public router: Router) { 
     var app_session = JSON.parse(localStorage.getItem("email-app-session"));
@@ -45,6 +46,7 @@ export class FoldersPanelComponent implements OnInit {
   getEmailDetail(sender,receiver,subject,body){
     this.showHideEmailDetail = true;
     this.showHideEmailList = false;
+    this.backButton = true;
     this.emailDetail = new Email(sender,receiver,subject,body);
     this.dataService.setEmailDetail(this.emailDetail);
     //this.router.navigate(['/email_detail']);
@@ -70,6 +72,8 @@ export class FoldersPanelComponent implements OnInit {
     });
   }
   back(){
-    this.router.navigate(['/side_panel']);
+    this.showHideEmailDetail = false;
+    this.showHideEmailList = true;
+    this.backButton = false;
   }
 }
