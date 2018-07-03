@@ -15,9 +15,9 @@ export class EmailDetailComponent implements OnInit {
   private visibleAnimate = false;
   public emailDetail: Email;
 
-  constructor(public email: Email,public dataService: DataServiceService) {
-    // this.emailDetail = dataService.getEmailDetail();
-    // console.log("email ov=bject received---",this.emailDetail);
+  constructor(dataService: DataServiceService, public router: Router) {
+     this.emailDetail = dataService.getEmailDetail();
+     console.log("email ov=bject received---",this.emailDetail);
    }
 
   ngOnInit() {
@@ -39,6 +39,8 @@ export class EmailDetailComponent implements OnInit {
       this.hide();
     }
   }
+
+  
 
 
 }

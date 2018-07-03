@@ -69,4 +69,7 @@ export class FoldersPanelComponent implements OnInit {
       console.log("signed In---",data.result.rows);
     });
   }
+  back(){
+    this.router.navigate(['/side_panel']);
+  }
 }
