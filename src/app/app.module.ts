@@ -9,15 +9,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from  '@angular/common/http';
 import { ApiService } from  './api.service';
 import { ComposeModalComponent } from './compose-modal/compose-modal.component';
+import { EmailDetailComponent } from './email-detail/email-detail.component';
 
 
 const routes: Routes = [
+  //{path: '',redirectTo: 'sign_up',pathMatch: 'full'},
   { path: 'sign_up', component: SignUpComponent },
   { path: 'sign_in', component: SignInComponent },
-  {path: 'side_panel', component: FoldersPanelComponent},
+  {path: 'side_panel', component: FoldersPanelComponent, children:[
+    {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'}
+  ]},
+  {path: 'email_detail', component: EmailDetailComponent}
   // {path: 'side_panel/inbox', component: FoldersPanelComponent},
   // {path: 'side_panel/sent', component: FoldersPanelComponent},
-  {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'}
+  // {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'}
   //,{path: '**', redirectTo: "/side_panel"}
 ];
 
@@ -27,7 +32,8 @@ const routes: Routes = [
     FoldersPanelComponent,
     SignInComponent,
     SignUpComponent,
-    ComposeModalComponent
+    ComposeModalComponent,
+    EmailDetailComponent
   ],
   imports: [
     RouterModule.forRoot(

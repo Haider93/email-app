@@ -7,8 +7,8 @@
 <body>
   <div>
     <div class="sidenav">
-      <button type="button" class="btn btn-primary" (click)="modal1.show()" >Compose</button>
-      <a [routerLink]="[{ outlets: { compose: ['compose_email']}}]" >Compose</a>
+      <!-- <button type="button" class="btn btn-primary" [routerLink]="[{ outlets: { compose: ['compose_email']}}]" (click)="modal1.show()" >Compose</button> -->
+      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" routerLinkActive="active" (click)="modal1.show()">Compose</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="inbox()">Inbox</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="sent()">Sent</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="deleted()">Deleted</a>
@@ -34,6 +34,7 @@
           </table>
       </div>
 
+      
       <app-compose-modal #modal1>
           <div class="app-compose-modal-header">
              <h1>Compose Email</h1>
@@ -49,28 +50,32 @@
               <button type="button" class="btn btn-primary" (click)='modal1.hide()'>Close</button>
           </div>
       </app-compose-modal>
+
+      <app-email-detail *ngIf="showHideEmailDetail"></app-email-detail>
       
-      <table class="table table-hover">
-        <!-- <thead>
-          <tr>
-            <th scope="col">Sender</th>
-            <th scope="col">Subject</th>
-          </tr>
-        </thead> -->
-        <tbody>
-          <tr *ngFor="let email of emails">
-                <td><input type="checkbox" id="myCheck" onclick=""></td>
-                <td>{{email.sender}}</td>
-                <td>{{email.subject}}</td>
-                <td><button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-remove-sign"></span> delete
-                  </button></td>
-          </tr>
-        </tbody>
-      </table>
+      <div *ngIf="showHideEmailList">
+          <table class="table table-hover">
+              <!-- <thead>
+                <tr>
+                  <th scope="col">Sender</th>
+                  <th scope="col">Subject</th>
+                </tr>
+              </thead> -->
+              <tbody>
+                <tr *ngFor="let email of emails" (click)="getEmailDetail(email.sender,email.receiver,email.subject,email.body)">
+                      <td><input type="checkbox" id="myCheck" onclick=""></td>
+                      <td>{{email.sender}}</td>
+                      <td>{{email.subject}}</td>
+                      <td><button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-remove-sign"></span> delete
+                        </button></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      
     </div>
   </div>
-
 
 </body>
 

@@ -1,36 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import {Email} from '../models/email';
 import { Router } from '@angular/router';
 import { ApiService } from  '../api.service';
+import { DataServiceService } from '../data-service.service';
 
 @Component({
-  selector: 'app-compose-modal',
-  templateUrl: './compose-modal.component.html',
-  styleUrls: ['./compose-modal.component.css']
+  selector: 'app-email-detail',
+  templateUrl: './email-detail.component.html',
+  styleUrls: ['./email-detail.component.css']
 })
-export class ComposeModalComponent implements OnInit {
+export class EmailDetailComponent implements OnInit {
 
   public visible = false;
   private visibleAnimate = false;
+  public emailDetail: Email;
 
-  constructor(private  apiService:  ApiService, private router: Router){
-    var app_session = JSON.parse(localStorage.getItem("email-app-session"));
-    var keys = [];
-    for(var k in app_session) keys.push(k);
-     var val = app_session[keys[0]];
-    this.loggedInEmail = val;
+  constructor(public email: Email,public dataService: DataServiceService) {
+    // this.emailDetail = dataService.getEmailDetail();
+    // console.log("email ov=bject received---",this.emailDetail);
+   }
+
+  ngOnInit() {
   }
 
   public show(): void {
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
   }
-  ngOnInit(){
-
-  }
 
   public hide(): void {
     this.visibleAnimate = false;
-    this.router.navigate(['/side_panel']);
+    //this.router.navigate(['/side_panel']);
     setTimeout(() => this.visible = false, 300);
   }
 
@@ -40,6 +40,5 @@ export class ComposeModalComponent implements OnInit {
     }
   }
 
-  loggedInEmail: string;
-  
+
 }

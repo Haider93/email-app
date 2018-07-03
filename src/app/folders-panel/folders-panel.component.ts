@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Email} from '../models/email';
-import {EMAILS} from '../models/mock-emails';
 import { ApiService } from  '../api.service';
+import {DataServiceService} from '../data-service.service';
+import { Router } from '@angular/router';
+import { EmailDetailComponent } from '../email-detail/email-detail.component';
 
 @Component({
   selector: 'app-folders-panel',
@@ -10,8 +12,13 @@ import { ApiService } from  '../api.service';
 })
 export class FoldersPanelComponent implements OnInit {
 
-  
-  constructor(private  apiService:  ApiService) { 
+  loggedInEmail: string;
+  emails: Email[];
+  public emailDetail: Email;
+  showHideEmailDetail: boolean = false;
+  showHideEmailList: boolean = true;
+
+  constructor(private  apiService:  ApiService, public dataService: DataServiceService, public router: Router) { 
     var app_session = JSON.parse(localStorage.getItem("email-app-session"));
     var keys = [];
     for(var k in app_session) keys.push(k);
@@ -27,13 +34,20 @@ export class FoldersPanelComponent implements OnInit {
     });
   }
 
-  loggedInEmail: string;
-  emails: Email[]
+  
   inbox(){
     this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
       console.log("signed In---",data.result.rows);
       this.emails = data.result.rows;
     });
+  }
+
+  getEmailDetail(sender,receiver,subject,body){
+    this.showHideEmailDetail = true;
+    this.showHideEmailList = false;
+    this.emailDetail = new Email(sender,receiver,subject,body);
+    this.dataService.setEmailDetail(this.emailDetail);
+    //this.router.navigate(['/email_detail']);
   }
 
   
