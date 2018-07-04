@@ -76,7 +76,13 @@ export class FoldersPanelComponent implements OnInit {
   }
 
   deleted(){
-    alert("delete called")
+    this.showHideEmailDetail = false;
+    this.showHideEmailList = true;
+    this.backButton = false;
+    this.apiService.deletedMails(this.loggedInEmail).subscribe((data: any) => {
+      console.log("deleted mails---",data.result.rows);
+      this.emails = data.result.rows;
+    });
   }
   composeEmail(receiver,subject,body){
     var date = '23-may-2018';
@@ -107,10 +113,15 @@ export class FoldersPanelComponent implements OnInit {
       this.emails[i]=arr[i];
     }
   }
-  delete(id: number){
+  delete(id,sender,receiver,subject,body,date,time){
     alert("Are you sure?"+id);
+    
     this.apiService.delete(id).subscribe((data: any) => {
       //console.log("signed In---",data);
+    });
+
+    this.apiService.insert_into_deleted(id,sender,receiver,subject,body,date,time,this.loggedInEmail).subscribe((data: any) => {
+      console.log("insert into delted called---",data);
     });
     for(var i=0;i<this.emails.length;i++)
     {
