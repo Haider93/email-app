@@ -35,4 +35,7 @@ export class ApiService {
   reply(sender: string, receiver: string,subject: string, body: string,date: string, time: string){
     return  this.httpClient.get(`${this.API_URL}/reply/`+sender+'/'+receiver+'/'+subject+'/'+body+'/'+date+'/'+time);
   }
+  delete(id: number){
+    return  this.httpClient.get(`${this.API_URL}/delete/`+id);
+  }
 }

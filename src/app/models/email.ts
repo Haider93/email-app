@@ -1,6 +1,7 @@
 import { Time } from "@angular/common";
 
 export class Email{
+    id: number;
     sender: string;
     receiver: string;
     subject: string;

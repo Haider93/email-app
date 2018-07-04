@@ -8,9 +8,9 @@
   <div>
     <div class="sidenav">
       <!-- <button type="button" class="btn btn-primary" [routerLink]="[{ outlets: { compose: ['compose_email']}}]" (click)="modal1.show()" >Compose</button> -->
-      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" routerLinkActive="active" (click)="modal1.show()">Compose</a>
-      <a routerLink="/side_panel" routerLinkActive="active" (click)="inbox()">Inbox</a>
-      <a routerLink="/side_panel" routerLinkActive="active" (click)="sent()">Sent</a>
+      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" class="btn btn-primary button" routerLinkActive="active" (click)="modal1.show()">Compose</a>
+      <a routerLink="/side_panel/inbox" routerLinkActive="active" (click)="inbox()">Inbox</a>
+      <a routerLink="/side_panel/sent" routerLinkActive="active" (click)="sent()">Sent</a>
       <a routerLink="/side_panel" routerLinkActive="active" (click)="deleted()">Deleted</a>
       <!-- <a routerLink="/sign_in" routerLinkActive="active">back</a> -->
     </div>
@@ -63,11 +63,14 @@
                 </tr>
               </thead> -->
               <tbody>
-                <tr *ngFor="let email of emails" (click)="getEmailDetail(email.sender,email.receiver,email.subject,email.body)">
-                      <td><input type="checkbox" id="myCheck" onclick=""></td>
+                <tr *ngFor="let email of emails">
+                      <td><input type="checkbox" id="myCheck"></td>
                       <td>{{email.sender}}</td>
                       <td>{{email.subject}}</td>
-                      <td><button type="button" class="btn btn-default btn-sm">
+                      <td><button type="button" class="btn btn-default btn-sm" (click)="getEmailDetail(email.sender,email.receiver,email.subject,email.body)">
+                       Read
+                      </button></td>
+                      <td><button type="button" class="btn btn-default btn-sm" (click)="delete(email.id)">
                           <span class="glyphicon glyphicon-remove-sign"></span> delete
                         </button></td>
                 </tr>

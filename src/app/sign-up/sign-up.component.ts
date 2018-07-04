@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit {
     {
       // for(var k in app_session) keys.push(k);
       // var val = app_session[k];
-      this.router.navigate(['/side_panel']);
+      this.router.navigate(['/side_panel/inbox']);
     }
   }
   signUpToken: any;
@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
       });
       this.apiService._signOutOption.next(true);
       this.apiService._userEmail.next(email.value);
-      this.router.navigate(['/side_panel']);
+      this.router.navigate(['/side_panel/inbox']);
     }
   }
 

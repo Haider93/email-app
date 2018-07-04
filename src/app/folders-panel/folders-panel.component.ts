@@ -30,20 +30,32 @@ export class FoldersPanelComponent implements OnInit {
   ngOnInit() {
     //this.emails = EMAILS;
     this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
-      console.log("signed In---",data.result.rows);
+      //console.log("signed In---",data.result.rowCount);
+      //this.emails = data;
       this.emails = data.result.rows;
     });
   }
 
   
   inbox(){
+    this.showHideEmailDetail = false;
+    this.showHideEmailList = true;
+    this.backButton = false;
     this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
-      console.log("signed In---",data.result.rows);
       this.emails = data.result.rows;
+      //this.emails = data;
+      console.log("emails before deletion in inbox--",this.emails);
     });
+    
   }
 
   getEmailDetail(sender,receiver,subject,body){
+    if(sender == this.loggedInEmail){
+      this.router.navigate(['/'+receiver]);
+    }
+    else if(receiver == this.loggedInEmail){
+      this.router.navigate(['/'+sender]);
+    }
     this.showHideEmailDetail = true;
     this.showHideEmailList = false;
     this.backButton = true;
@@ -54,6 +66,9 @@ export class FoldersPanelComponent implements OnInit {
 
   
   sent(){
+    this.showHideEmailDetail = false;
+    this.showHideEmailList = true;
+    this.backButton = false;
     this.apiService.sent(this.loggedInEmail).subscribe((data: any) => {
       console.log("signed In---",data.result.rows);
       this.emails = data.result.rows;
@@ -75,5 +90,35 @@ export class FoldersPanelComponent implements OnInit {
     this.showHideEmailDetail = false;
     this.showHideEmailList = true;
     this.backButton = false;
+  }
+  removeItem(id: number){
+    //remove id index element freom emails array
+    var arr = [];
+    for(var i=0;i<this.emails.length;i++)
+    {
+      if(id != this.emails[i].id)
+      {
+        arr.push(this.emails[i]);
+      }
+    }
+    this.emails = [];
+    for(var i=0;i<arr.length;i++)
+    {
+      this.emails[i]=arr[i];
+    }
+  }
+  delete(id: number){
+    alert("Are you sure?"+id);
+    this.apiService.delete(id).subscribe((data: any) => {
+      //console.log("signed In---",data);
+    });
+    for(var i=0;i<this.emails.length;i++)
+    {
+      if(this.emails[i].id == id)
+      {
+        this.removeItem(id);
+        return;
+      }
+    }
   }
 }

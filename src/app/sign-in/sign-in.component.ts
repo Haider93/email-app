@@ -18,7 +18,7 @@ export class SignInComponent implements OnInit {
     {
       // for(var k in app_session) keys.push(k);
       // var val = app_session[k];
-      this.router.navigate(['/side_panel']);
+      this.router.navigate(['/side_panel/inbox']);
     }
   }
 
@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
   signIn(email,password){
     this.apiService.signIn(email.value,password.value).subscribe((data: any) => {
       console.log("signed In---",data);
-      this.router.navigate(['/side_panel']);
+      this.router.navigate(['/side_panel/inbox']);
       this.apiService._signOutOption.next(true);
       this.apiService._userEmail.next(email.value);
     });

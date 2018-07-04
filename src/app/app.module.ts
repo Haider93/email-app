@@ -17,12 +17,12 @@ const routes: Routes = [
   { path: 'sign_up', component: SignUpComponent },
   { path: 'sign_in', component: SignInComponent },
   {path: 'side_panel', component: FoldersPanelComponent, children:[
-    {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'}
+    {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'},
+    {path: 'inbox', component: FoldersPanelComponent},
+    {path: 'sent', component: FoldersPanelComponent},
+    {path: 'email_detail/:id', component: EmailDetailComponent}
   ]},
-  {path: 'email_detail', component: EmailDetailComponent}
-  // {path: 'side_panel/inbox', component: FoldersPanelComponent},
-  // {path: 'side_panel/sent', component: FoldersPanelComponent},
-  // {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'}
+  
   //,{path: '**', redirectTo: "/side_panel"}
 ];
 
