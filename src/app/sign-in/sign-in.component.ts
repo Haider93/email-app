@@ -26,9 +26,15 @@ export class SignInComponent implements OnInit {
   signIn(email,password){
     this.apiService.signIn(email.value,password.value).subscribe((data: any) => {
       console.log("signed In---",data);
-      this.router.navigate(['/side_panel/inbox']);
+      //debugger;
+      if(email.value == data.email && password.value == data.password){
+        this.router.navigate(['/side_panel/inbox']);
       this.apiService._signOutOption.next(true);
       this.apiService._userEmail.next(email.value);
+      }
+      else{
+        alert("Wrong credentials");
+      }
     });
     // var email_id = this.data["email"];
     //   var pwd = this.data["password"];

@@ -39,7 +39,7 @@ export class ApiService {
     return  this.httpClient.get(`${this.API_URL}/delete/`+id);
   }
   insert_into_deleted(id: number,sender: string, receiver: string,subject: string, body: string,date: string, time: string, deleted_by: string){
-    return  this.httpClient.get(`${this.API_URL}/insert_into_deleted/`+id+'/'+sender+'/'+receiver+'/'+subject+'/'+body+'/'+date+'/'+time+'/'+deleted_by);
+    return  this.httpClient.get(`${this.API_URL}/insert_to_deleted/`+id+'/'+sender+'/'+receiver+'/'+subject+'/'+body+'/'+date+'/'+time+'/'+deleted_by);
   }
   deletedMails(email: string){
     return  this.httpClient.get(`${this.API_URL}/deleted/`+email);

@@ -22,7 +22,7 @@ export class AppComponent {
       var val = app_session[k];
       this.userEmail = val;
       this.signOutOption = true;
-      this.router.navigate(['side_panel/inbox']);
+      //this.router.navigate(['side_panel/inbox']);
       //alert(this.userEmail+this.signOutOption);
      }
      else{

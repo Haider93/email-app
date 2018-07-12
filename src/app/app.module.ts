@@ -18,9 +18,15 @@ const routes: Routes = [
   { path: 'sign_in', component: SignInComponent },
   {path: 'side_panel', component: FoldersPanelComponent, children:[
     {path: 'compose_email', component: ComposeModalComponent, outlet: 'compose'},
-    {path: 'inbox', component: FoldersPanelComponent},
-    {path: 'sent', component: FoldersPanelComponent},
-    {path: 'email_detail/:id', component: EmailDetailComponent}
+    {path: 'inbox', component: FoldersPanelComponent, children:[
+      {path: 'email_detail/:id', component: EmailDetailComponent}
+    ]},
+    {path: 'sent', component: FoldersPanelComponent,children:[
+      {path: 'email_detail/:id', component: EmailDetailComponent}
+    ]},
+    {path: 'deleted', component: FoldersPanelComponent,children:[
+      {path: 'email_detail/:id', component: EmailDetailComponent}
+    ]}
   ]},
   
   //,{path: '**', redirectTo: "/side_panel"}
