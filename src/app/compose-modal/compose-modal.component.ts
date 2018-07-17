@@ -11,6 +11,7 @@ export class ComposeModalComponent implements OnInit {
 
   public visible = false;
   private visibleAnimate = false;
+  prevUrl: string;
 
   constructor(private  apiService:  ApiService, private router: Router){
     var app_session = JSON.parse(localStorage.getItem("email-app-session"));
@@ -22,6 +23,7 @@ export class ComposeModalComponent implements OnInit {
 
   public show(): void {
     this.visible = true;
+    this.prevUrl = this.router.url;
     setTimeout(() => this.visibleAnimate = true, 100);
   }
   ngOnInit(){
@@ -30,7 +32,8 @@ export class ComposeModalComponent implements OnInit {
 
   public hide(): void {
     this.visibleAnimate = false;
-    this.router.navigate(['/side_panel']);
+    //alert(this.prevUrl);
+    //this.router.navigate(['/side_panel/'+this.prevUrl]);
     setTimeout(() => this.visible = false, 300);
   }
 

@@ -38,7 +38,7 @@ export class FoldersPanelComponent implements OnInit {
     this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
       //console.log("signed In---",data.result.rowCount);
       //this.emails = data;
-      this.emails = data.result.rows;
+      this.emails = data;
     });
   }
 
@@ -51,7 +51,7 @@ export class FoldersPanelComponent implements OnInit {
     this.showHideEmailList = true;
     this.backButton = false;
     this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
-      this.emails = data.result.rows;
+      this.emails = data;
       console.log("emails before deletion in inbox--",this.emails);
     });
     
@@ -78,8 +78,7 @@ export class FoldersPanelComponent implements OnInit {
     this.showHideEmailList = true;
     this.backButton = false;
     this.apiService.sent(this.loggedInEmail).subscribe((data: any) => {
-      console.log("signed In---",data.result.rows);
-      this.emails = data.result.rows;
+      this.emails = data;
     });
   }
 
@@ -91,8 +90,7 @@ export class FoldersPanelComponent implements OnInit {
     this.showHideEmailList = true;
     this.backButton = false;
     this.apiService.deletedMails(this.loggedInEmail).subscribe((data: any) => {
-      console.log("deleted mails---",data.result.rows);
-      this.emails = data.result.rows;
+      this.emails = data;
     });
   }
   composeEmail(receiver,subject,body){
@@ -100,7 +98,6 @@ export class FoldersPanelComponent implements OnInit {
     var time = '11:00';
     console.log('email subject---------------', subject);
     this.apiService.reply(this.loggedInEmail,receiver,subject,body,date,time).subscribe((data: any) => {
-      console.log("signed In---",data.result.rows);
     });
   }
   back(){

@@ -54,7 +54,7 @@
 
       <app-email-detail *ngIf="showHideEmailDetail"></app-email-detail>
 
-      <button type="button" *ngIf="replyButton" class="btn btn-default btn-sm">Reply</button> &nbsp;
+      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" *ngIf="replyButton" class="btn btn-primary button" routerLinkActive="active" (click)="modal1.show()">Reply</a> &nbsp;
 
       <button type="button" *ngIf="deleteButton" class="btn btn-default btn-sm">Delete</button>
       
