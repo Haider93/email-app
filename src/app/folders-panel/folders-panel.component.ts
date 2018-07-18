@@ -23,6 +23,9 @@ export class FoldersPanelComponent implements OnInit {
   deleteButton: boolean = false;
   prevUrl: string;
   unreadEmails: number = 0;
+  inboxTabActive: boolean = true;
+  sentTabActive: boolean = false;
+  deletedTabActive: boolean = false;
 
   constructor(private route: ActivatedRoute,private  apiService:  ApiService, public dataService: DataServiceService, public router: Router) { 
     var app_session = JSON.parse(localStorage.getItem("email-app-session"));
@@ -48,6 +51,9 @@ export class FoldersPanelComponent implements OnInit {
 
   
   inbox(){
+    this.inboxTabActive = true;
+    this.sentTabActive = false;
+    this.deletedTabActive = false;
     this.router.navigate(['/side_panel/inbox']);
     this.replyButton = false;
     this.deleteButton = false;
@@ -65,6 +71,11 @@ export class FoldersPanelComponent implements OnInit {
   }
 
   getEmailDetail(id,sender,receiver,subject,body){
+    this.apiService.count_unread_emails(this.loggedInEmail,'unread').subscribe((data: any) => {
+      this.unreadEmails = data[0].count-1;
+    });
+    this.apiService.update_read_status('read',id).subscribe((data: any) => {
+    });
     this.replyButton = true;
     this.deleteButton = true;
     this.showHideEmailDetail = true;
@@ -74,15 +85,13 @@ export class FoldersPanelComponent implements OnInit {
     this.dataService.setEmailDetail(this.emailDetail);
     this.prevUrl = this.router.url;
     this.router.navigate([this.router.url+'/email_detail/', id]);
-    this.apiService.update_read_status('read',id).subscribe((data: any) => {
-    });
-    this.apiService.count_unread_emails(this.loggedInEmail,'unread').subscribe((data: any) => {
-      this.unreadEmails = data[0].count;
-    });
   }
 
   
   sent(){
+    this.inboxTabActive = false;
+    this.sentTabActive = true;
+    this.deletedTabActive = false;
     this.router.navigate(['/side_panel/sent']);
     this.replyButton = false;
     this.deleteButton = false;
@@ -95,6 +104,9 @@ export class FoldersPanelComponent implements OnInit {
   }
 
   deleted(){
+    this.inboxTabActive = false;
+    this.sentTabActive = false;
+    this.deletedTabActive = true;
     this.router.navigate(['/side_panel/deleted']);
     this.replyButton = false;
     this.deleteButton = false;
@@ -132,6 +144,30 @@ export class FoldersPanelComponent implements OnInit {
     this.showHideEmailDetail = false;
     this.showHideEmailList = true;
     this.backButton = false;
+    if(this.inboxTabActive == true)
+    {
+      this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
+        this.emails = data;
+        console.log("emails before deletion in inbox--",this.emails);
+      });
+    }
+    else if(this.sentTabActive == true)
+    {
+      this.apiService.sent(this.loggedInEmail).subscribe((data: any) => {
+        this.emails = data;
+      });
+    }
+    else if(this.deletedTabActive == true){
+      this.apiService.deletedMails(this.loggedInEmail).subscribe((data: any) => {
+        this.emails = data;
+      });
+    }
+    else{
+      this.apiService.inbox(this.loggedInEmail).subscribe((data: any) => {
+        this.emails = data;
+        console.log("emails before deletion in inbox--",this.emails);
+      });
+    }
   }
   removeItem(id: number){
     //remove id index element freom emails array
