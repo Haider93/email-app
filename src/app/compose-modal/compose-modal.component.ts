@@ -23,7 +23,7 @@ export class ComposeModalComponent implements OnInit {
 
   public show(): void {
     this.visible = true;
-    this.prevUrl = this.router.url;
+    //this.prevUrl = this.router.url;
     setTimeout(() => this.visibleAnimate = true, 100);
   }
   ngOnInit(){

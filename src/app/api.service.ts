@@ -32,8 +32,8 @@ export class ApiService {
   sent(email: string){
     return  this.httpClient.get(`${this.API_URL}/sent/`+email);
   }
-  reply(sender: string, receiver: string,subject: string, body: string,date: string, time: string){
-    return  this.httpClient.get(`${this.API_URL}/reply/`+sender+'/'+receiver+'/'+subject+'/'+body+'/'+date+'/'+time);
+  reply(sender: string, receiver: string,subject: string, body: string,date: string, time: string,read_status: string){
+    return  this.httpClient.get(`${this.API_URL}/reply/`+sender+'/'+receiver+'/'+subject+'/'+body+'/'+date+'/'+time+'/'+read_status);
   }
   delete(id: number){
     return  this.httpClient.get(`${this.API_URL}/delete/`+id);
@@ -43,5 +43,11 @@ export class ApiService {
   }
   deletedMails(email: string){
     return  this.httpClient.get(`${this.API_URL}/deleted/`+email);
+  }
+  update_read_status(read_status: string,id: number){
+    return  this.httpClient.get(`${this.API_URL}/update_read_status/`+read_status+'/'+id);
+  }
+  count_unread_emails(email: string, read_status: string){
+    return  this.httpClient.get(`${this.API_URL}/count_unread_emails/`+email+'/'+read_status);
   }
 }

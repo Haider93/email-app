@@ -22,6 +22,7 @@ export class FoldersPanelComponent implements OnInit {
   replyButton: boolean = false;
   deleteButton: boolean = false;
   prevUrl: string;
+  unreadEmails: number = 0;
 
   constructor(private route: ActivatedRoute,private  apiService:  ApiService, public dataService: DataServiceService, public router: Router) { 
     var app_session = JSON.parse(localStorage.getItem("email-app-session"));
@@ -39,6 +40,9 @@ export class FoldersPanelComponent implements OnInit {
       //console.log("signed In---",data.result.rowCount);
       //this.emails = data;
       this.emails = data;
+    }); 
+    this.apiService.count_unread_emails(this.loggedInEmail,'unread').subscribe((data: any) => {
+      this.unreadEmails = data[0].count;
     });
   }
 
@@ -54,6 +58,9 @@ export class FoldersPanelComponent implements OnInit {
       this.emails = data;
       console.log("emails before deletion in inbox--",this.emails);
     });
+    this.apiService.count_unread_emails(this.loggedInEmail,'unread').subscribe((data: any) => {
+      this.unreadEmails = data[0].count;
+    });
     
   }
 
@@ -67,6 +74,11 @@ export class FoldersPanelComponent implements OnInit {
     this.dataService.setEmailDetail(this.emailDetail);
     this.prevUrl = this.router.url;
     this.router.navigate([this.router.url+'/email_detail/', id]);
+    this.apiService.update_read_status('read',id).subscribe((data: any) => {
+    });
+    this.apiService.count_unread_emails(this.loggedInEmail,'unread').subscribe((data: any) => {
+      this.unreadEmails = data[0].count;
+    });
   }
 
   
@@ -94,12 +106,25 @@ export class FoldersPanelComponent implements OnInit {
     });
   }
   composeEmail(receiver,subject,body){
-    var date = '23-may-2018';
-    var time = '11:00';
-    console.log('email subject---------------', subject);
-    this.apiService.reply(this.loggedInEmail,receiver,subject,body,date,time).subscribe((data: any) => {
+    var t = new Date();
+    var date = t.toLocaleDateString('en-US');
+    date = this.convertDate(date);
+    var time = t.toLocaleString('en-US',{hour: 'numeric', minute: 'numeric', second:'numeric', hour12: false});
+    var read_status = 'unread';
+    this.apiService.reply(this.loggedInEmail,receiver,subject,body,date,time,read_status).subscribe((data: any) => {
+      console.log("Email data---",data);
+      if(data.length==0)
+        alert("message sent");
+      else
+        alert("error occurred");
     });
+
   }
+  convertDate(stringdate)
+{
+    stringdate = stringdate.replace(/\//g, "-");
+    return stringdate;
+}
   back(){
     this.router.navigate([this.prevUrl]);
     this.replyButton = false;
@@ -125,14 +150,16 @@ export class FoldersPanelComponent implements OnInit {
     }
   }
   delete(id,sender,receiver,subject,body,date,time){
-    alert("Are you sure?"+id);
+    alert("Are you sure?");
     
     this.apiService.delete(id).subscribe((data: any) => {
-      //console.log("signed In---",data);
+      // if(data.length == 0)
+      //   alert("Email Deleted");
     });
 
     this.apiService.insert_into_deleted(id,sender,receiver,subject,body,date,time,this.loggedInEmail).subscribe((data: any) => {
-      console.log("insert into delted called---",data);
+      if(data.length == 0)
+        alert("Email Deleted");
     });
     for(var i=0;i<this.emails.length;i++)
     {
