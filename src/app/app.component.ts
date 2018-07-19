@@ -10,7 +10,7 @@ import { ApiService } from  './api.service';
 export class AppComponent {
   title = 'Email App';
   userEmail: string;
-  signOutOption: boolean;
+  signOutOption: boolean = true;
   constructor(private  apiService:  ApiService, public router: Router){
     
     //this.router.navigate(['side_panel']);
@@ -22,7 +22,7 @@ export class AppComponent {
       var val = app_session[k];
       this.userEmail = val;
       this.signOutOption = true;
-      //this.router.navigate(['side_panel/inbox']);
+      this.router.navigate(['side_panel/inbox']);
       //alert(this.userEmail+this.signOutOption);
      }
      else{
@@ -36,6 +36,19 @@ export class AppComponent {
       });
      
     
+  }
+  ngOnInit(){
+    var app_session = JSON.parse(localStorage.getItem("email-app-session"));
+     if(app_session != null)
+     {
+       var keys = [];
+      for(var k in app_session) keys.push(k);
+      var val = app_session[k];
+      this.userEmail = val;
+      this.signOutOption = true;
+      this.router.navigate(['side_panel/inbox']);
+      //alert(this.userEmail+this.signOutOption);
+     }
   }
 
   signOut(){
