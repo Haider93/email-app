@@ -11,19 +11,19 @@
       <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" class="btn btn-primary button" routerLinkActive="active"
         (click)="modal1.show()">Compose</a>
       <div *ngIf="inboxTabActive">
-          <a routerLink="/side_panel/inbox" style="color:steelblue;text-decoration: underline" routerLinkActive="active" (click)="inbox()">Inbox({{unreadEmails}})</a>
+          <a routerLink="/side_panel/inbox" style="color:steelblue;text-decoration: underline;font-size: 20px" routerLinkActive="active" (click)="inbox()">Inbox({{unreadEmails}})</a>
       </div>
       <div *ngIf="!inboxTabActive">
           <a routerLink="/side_panel/inbox" style="color: white" routerLinkActive="active" (click)="inbox()">Inbox({{unreadEmails}})</a>
       </div>
       <div *ngIf="sentTabActive">
-          <a routerLink="/side_panel/sent" style="color:steelblue;text-decoration: underline" routerLinkActive="active" (click)="sent()">Sent</a>
+          <a routerLink="/side_panel/sent" style="color:steelblue;text-decoration: underline;font-size: 20px" routerLinkActive="active" (click)="sent()">Sent</a>
       </div>
       <div *ngIf="!sentTabActive">
           <a routerLink="/side_panel/sent" style="color: white" routerLinkActive="active" (click)="sent()">Sent</a>
       </div>
       <div *ngIf="deletedTabActive">
-          <a routerLink="/side_panel/deleted" style="color:steelblue;text-decoration: underline" routerLinkActive="active" (click)="deleted()">Deleted</a>
+          <a routerLink="/side_panel/deleted" style="color:steelblue;text-decoration: underline;font-size: 20px" routerLinkActive="active" (click)="deleted()">Deleted</a>
       </div>
       <div *ngIf="!deletedTabActive">
           <a routerLink="/side_panel/deleted" style="color: white" routerLinkActive="active" (click)="deleted()">Deleted</a>
