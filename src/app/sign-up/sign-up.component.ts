@@ -27,9 +27,10 @@ export class SignUpComponent implements OnInit {
 
   submitForm(email,password,confirmPassword){
     console.log("sign up backend--",email.value);
-    if(password.value != confirmPassword.value)
+    var emailTest = this.validateEmail(email.value);
+    if(password.value != confirmPassword.value || (!emailTest))
     {
-      console.log("Password doen't get matched");
+      alert("Password doen't get matched or email doesn't contain @");
     }
     else{
       this.apiService.signUp(email.value,password.value).subscribe((data:  string) => {
@@ -39,6 +40,11 @@ export class SignUpComponent implements OnInit {
       this.apiService._userEmail.next(email.value);
       this.router.navigate(['/side_panel/inbox']);
     }
+  }
+
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
 
 }

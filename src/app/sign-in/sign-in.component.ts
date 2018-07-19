@@ -24,24 +24,27 @@ export class SignInComponent implements OnInit {
 
 
   signIn(email,password){
-    this.apiService.signIn(email.value,password.value).subscribe((data: any) => {
-      console.log("signed In---",data);
-      //debugger;
-      if(email.value == data.email && password.value == data.password){
-        this.router.navigate(['/side_panel/inbox']);
-      this.apiService._signOutOption.next(true);
-      this.apiService._userEmail.next(email.value);
-      }
-      else{
-        alert("Wrong credentials");
-      }
-    });
-    // var email_id = this.data["email"];
-    //   var pwd = this.data["password"];
-    //   if(email == email_id && password == pwd)
-    //     this.router.navigate(['/side_panel']);
-    //   else
-    //     alert("wrong credentials");
+    if(!this.validateEmail(email.value)){
+      alert("Email doesn't contain @ symbol");
+    }
+    else{
+      this.apiService.signIn(email.value,password.value).subscribe((data: any) => {
+        console.log("signed In---",data);
+        //debugger;
+        if(email.value == data.email && password.value == data.password){
+          this.router.navigate(['/side_panel/inbox']);
+        this.apiService._signOutOption.next(true);
+        this.apiService._userEmail.next(email.value);
+        }
+        else{
+          alert("Wrong credentials");
+        }
+      });
+    }
+  }
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
 
 }
