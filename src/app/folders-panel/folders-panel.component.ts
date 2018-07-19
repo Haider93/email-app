@@ -72,7 +72,8 @@ export class FoldersPanelComponent implements OnInit {
 
   getEmailDetail(id,sender,receiver,subject,body){
     this.apiService.count_unread_emails(this.loggedInEmail,'unread').subscribe((data: any) => {
-      this.unreadEmails = data[0].count-1;
+      if(data[0].count>0)
+        this.unreadEmails = data[0].count-1;
     });
     this.apiService.update_read_status('read',id).subscribe((data: any) => {
     });
