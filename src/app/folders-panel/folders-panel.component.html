@@ -8,58 +8,67 @@
   <div>
     <div class="sidenav">
       <!-- <button type="button" class="btn btn-primary" [routerLink]="[{ outlets: { compose: ['compose_email']}}]" (click)="modal1.show()" >Compose</button> -->
-      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" class="btn btn-primary button" routerLinkActive="active" (click)="modal1.show()">Compose</a>
+      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" class="btn btn-primary button" routerLinkActive="active"
+        (click)="modal1.show()">Compose</a>
       <a routerLink="/side_panel/inbox" routerLinkActive="active" (click)="inbox()">Inbox({{unreadEmails}})</a>
       <a routerLink="/side_panel/sent" routerLinkActive="active" (click)="sent()">Sent</a>
       <a routerLink="/side_panel/deleted" routerLinkActive="active" (click)="deleted()">Deleted</a>
       <!-- <a routerLink="/sign_in" routerLinkActive="active">back</a> -->
     </div>
 
-    
+
     <div class="main" ng-if="emails">
       <br/>
       <div>
-        <h1>Main Panel goes here</h1>
+        <h3>Gizmodo Email</h3>
         <table class="table">
-            <tbody>
-              <tr>
-                <td>
-                    <p>Select all</p><input type="checkbox" id="myCheck" onclick="">
-                </td>
-                <td><button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-remove-sign"></span> delete
-                  </button></td>
-              </tr>
-              <button class="btn btn-primary" *ngIf="backButton" (click)="back()">back</button><br/>
-            </tbody>
-          </table>
+          <tbody>
+            <tr>
+              <td>
+                <button type="button" class="btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-remove-sign"></span> Delete All
+                </button>
+              </td>
+            </tr>
+            <button class="btn btn-primary" *ngIf="backButton" (click)="back()">back</button>
+            <br/>
+          </tbody>
+        </table>
       </div>
 
-      
+
       <app-compose-modal #modal1>
-          <div class="app-compose-modal-header">
-             <h1>Compose Email</h1>
-          </div>
-          <div class="app-compose-modal-body" style="height:auto;width:auto;">
-              <input type="text" class="form-control " #receiver name="to " placeholder="receiver " required="required "><br/>
-              <!-- <input ng-value='loggedInEmail' type="text" class="form-control " #sender name="from " placeholder="sender " required="required "><br/> -->
-              <input type="text" class="form-control " #subject name="subject " placeholder="Email Subject " required="required "><br/>
-              <textarea rows="4" class="form-control " #body cols="65" placeholder="Email body "></textarea> 
-          </div>
-          <div class="app-compose-modal-footer">
-              <button type="button" class="btn btn-default" (click)='composeEmail(receiver.value,subject.value,body.value);modal1.hide()'>Send</button>
-              <button type="button" class="btn btn-primary" (click)='modal1.hide();modal1.clear()'>Close</button>
-          </div>
+        <div class="app-compose-modal-header">
+          <h1>Compose Email</h1>
+        </div>
+        <div class="app-compose-modal-body" style="height:auto;width:auto;">
+          <input type="text" class="form-control " #receiver name="to " placeholder="receiver " required="required ">
+          <br/>
+          <!-- <input ng-value='loggedInEmail' type="text" class="form-control " #sender name="from " placeholder="sender " required="required "><br/> -->
+          <input type="text" class="form-control " #subject name="subject " placeholder="Email Subject " required="required ">
+          <br/>
+          <textarea rows="4" class="form-control " #body cols="65" placeholder="Email body "></textarea>
+        </div>
+        <div class="app-compose-modal-footer">
+          <button type="button" class="btn btn-default" (click)='composeEmail(receiver.value,subject.value,body.value);modal1.hide()'>Send</button>
+          <button type="button" class="btn btn-primary" (click)='modal1.hide();modal1.clear()'>Close</button>
+        </div>
       </app-compose-modal>
 
       <app-email-detail *ngIf="showHideEmailDetail"></app-email-detail>
 
-      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" *ngIf="replyButton" class="btn btn-primary button" routerLinkActive="active" (click)="modal1.show()">Reply</a> &nbsp;
+      <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" *ngIf="replyButton" class="btn btn-primary button"
+        routerLinkActive="active" (click)="modal1.show()">Reply</a> &nbsp;
 
       <button type="button" *ngIf="deleteButton" class="btn btn-default btn-sm">Delete</button>
-      
-      <div *ngIf="showHideEmailList">
-          <table class="table table-hover">
+
+      <div class="container" *ngIf="showHideEmailList">
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Email List</h4>
+            </div>
+            <table class="table table-fixed">
               <thead>
                 <tr>
                   <th *ngIf="inboxTabActive" scope="col">Read Status</th>
@@ -71,21 +80,27 @@
               </thead>
               <tbody>
                 <tr *ngFor="let email of emails">
-                      <!-- <td><input type="checkbox" id="myCheck"></td> -->
-                      <td *ngIf="inboxTabActive">{{email.read_status}}</td>
-                      <td>{{email.sender}}</td>
-                      <td>{{email.subject}}</td>
-                      <td><button type="button" class="btn btn-default btn-sm" (click)="getEmailDetail(email.id,email.sender,email.receiver,email.subject,email.body)">
-                       Read
-                      </button></td>
-                      <td><button type="button" class="btn btn-default btn-sm" (click)="delete(email.id,email.sender,email.receiver,email.subject,email.body,email.date,email.time)">
-                          <span class="glyphicon glyphicon-remove-sign"></span> delete
-                        </button></td>
+                  <!-- <td><input type="checkbox" id="myCheck"></td> -->
+                  <td *ngIf="inboxTabActive">{{email.read_status}}</td>
+                  <td>{{email.sender}}</td>
+                  <td>{{email.subject}}</td>
+                  <td>
+                    <button type="button" class="btn btn-default btn-sm" (click)="getEmailDetail(email.id,email.sender,email.receiver,email.subject,email.body)">
+                      Read
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-default btn-sm" (click)="delete(email.id,email.sender,email.receiver,email.subject,email.body,email.date,email.time)">
+                      <span class="glyphicon glyphicon-remove-sign"></span> delete
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
       </div>
-      
+
     </div>
   </div>
 

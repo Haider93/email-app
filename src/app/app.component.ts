@@ -8,7 +8,7 @@ import { ApiService } from  './api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Email App';
+  title = 'Gizmodo Email';
   userEmail: string;
   signOutOption: boolean = true;
   constructor(private  apiService:  ApiService, public router: Router){
