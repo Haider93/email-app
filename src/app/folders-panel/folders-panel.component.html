@@ -10,12 +10,26 @@
       <!-- <button type="button" class="btn btn-primary" [routerLink]="[{ outlets: { compose: ['compose_email']}}]" (click)="modal1.show()" >Compose</button> -->
       <a [routerLink]="['/side_panel',{ outlets: { compose: ['compose_email']}}]" class="btn btn-primary button" routerLinkActive="active"
         (click)="modal1.show()">Compose</a>
-      <a routerLink="/side_panel/inbox" routerLinkActive="active" (click)="inbox()">Inbox({{unreadEmails}})</a>
-      <a routerLink="/side_panel/sent" routerLinkActive="active" (click)="sent()">Sent</a>
-      <a routerLink="/side_panel/deleted" routerLinkActive="active" (click)="deleted()">Deleted</a>
-      <!-- <a routerLink="/sign_in" routerLinkActive="active">back</a> -->
+      <div *ngIf="inboxTabActive">
+          <a routerLink="/side_panel/inbox" style="color:steelblue;text-decoration: underline" routerLinkActive="active" (click)="inbox()">Inbox({{unreadEmails}})</a>
+      </div>
+      <div *ngIf="!inboxTabActive">
+          <a routerLink="/side_panel/inbox" style="color: white" routerLinkActive="active" (click)="inbox()">Inbox({{unreadEmails}})</a>
+      </div>
+      <div *ngIf="sentTabActive">
+          <a routerLink="/side_panel/sent" style="color:steelblue;text-decoration: underline" routerLinkActive="active" (click)="sent()">Sent</a>
+      </div>
+      <div *ngIf="!sentTabActive">
+          <a routerLink="/side_panel/sent" style="color: white" routerLinkActive="active" (click)="sent()">Sent</a>
+      </div>
+      <div *ngIf="deletedTabActive">
+          <a routerLink="/side_panel/deleted" style="color:steelblue;text-decoration: underline" routerLinkActive="active" (click)="deleted()">Deleted</a>
+      </div>
+      <div *ngIf="!deletedTabActive">
+          <a routerLink="/side_panel/deleted" style="color: white" routerLinkActive="active" (click)="deleted()">Deleted</a>
+      </div>
     </div>
-
+ss
 
     <div class="main" ng-if="emails">
       <br/>
@@ -66,7 +80,9 @@
         <div class="row">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>Email List</h4>
+              <h4 *ngIf="inboxTabActive">Inbox Emails</h4>
+              <h4 *ngIf="sentTabActive">Sent Emails</h4>
+              <h4 *ngIf="deletedTabActive">Deleted Emails</h4>
             </div>
             <table class="table table-fixed">
               <thead>
