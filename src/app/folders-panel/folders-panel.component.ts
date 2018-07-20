@@ -118,6 +118,10 @@ export class FoldersPanelComponent implements OnInit {
       this.emails = data;
     });
   }
+
+  deleteAll(){
+    alert("All will be deleted!!");
+  }
   composeEmail(receiver,subject,body){
     var t = new Date();
     var date = t.toLocaleDateString('en-US');

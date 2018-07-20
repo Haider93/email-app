@@ -54,7 +54,7 @@ export class AppComponent {
   signOut(){
     localStorage.clear();
     this.apiService._signOutOption.next(false);
-    this.apiService._userEmail.next("");
+    this.apiService._userEmail.next("logged out");
     this.router.navigate(['sign_in']);
   }
 }
